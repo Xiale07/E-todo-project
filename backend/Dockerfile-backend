@@ -1,0 +1,16 @@
+FROM node
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+RUN chmod +x /app/server/wait-for.sh
+
+RUN apt-get update && apt-get install -y netcat-openbsd
+
+EXPOSE 3000
+
+CMD ["./server/wait-for.sh", "database", "node", "server/server.js"]
