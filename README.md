@@ -66,7 +66,7 @@ B-WEB-101-LIL-1-1-etodo-2
 │  ├─ eslint.config.js
 │  ├─ index.html
 │  ├─ package.json
-│  ├─ public/
+│  |
 │  └─ src/
 │     ├─ assets/react.svg
 │     ├─ index.css
@@ -153,7 +153,7 @@ SELECT * FROM todo;
 
 ---
 
-## 👥 Crédits
+## 👥 Crédits (avant le commit Start)
 
 ### Frontend
 
@@ -169,6 +169,23 @@ SELECT * FROM todo;
 Bastien, Estelle, Joseph, Leïa, Lucie, Achille, Clément, Julia, Malvina,
 Marie-Delphine, Benoît, Juliette, Mathieu, Christophe, Jean-Paul, Anaïs,
 Gauthier, Julien, Louison, Laurent, Cathy
+
+
+---
+
+## 👥 Crédits (après le commit Start)
+
+### Frontend && Backend
+
+* Alexis Vallart
+
+
+### Remerciements
+
+Bastien, Estelle, Joseph, Leïa, Lucie, Achille, Clément, Julia, Malvina,
+Marie-Delphine, Benoît, Juliette, Mathieu, Christophe, Jean-Paul, Anaïs,
+Gauthier, Julien, Louison, Laurent, Cathy
+
 
 ---
 

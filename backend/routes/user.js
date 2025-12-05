@@ -7,7 +7,6 @@ require("dotenv").config();
 
 const router = express.Router();
 
-
 router.options("/", (req, res) => res.sendStatus(200));
 
 /* ===============================================================
@@ -37,7 +36,7 @@ router.post("/register", async (req, res) => {
             [firstname, name, hashed, email, birthdate]
         );
 
-        return res.json({ success: true, message: "Utilisateur créé !" });
+        return res.status(201).json({ success: true, message: "Utilisateur créé avec succès !" });
 
     } catch (err) {
         console.error(err);
@@ -64,7 +63,7 @@ router.post("/login", async (req, res) => {
 
         const valid = await bcrypt.compare(password, user.password);
         if (!valid)
-            return res.status(400).json({ error: "Invalid password" });
+            return res.status(401).json({ error: "Invalid password" });
 
         if (!process.env.JWT_SECRET)
             return res.status(500).json({ error: "JWT_SECRET manquant" });
@@ -75,7 +74,11 @@ router.post("/login", async (req, res) => {
             { expiresIn: "7d" }
         );
 
-        res.json({ success: true, token });
+        return res.status(200).json({
+            success: true,
+            message: "Utilisateur connecté avec succès !",
+            token
+        });
 
     } catch (err) {
         console.error(err);
@@ -84,7 +87,7 @@ router.post("/login", async (req, res) => {
 });
 
 /* ===============================================================
- *                           GET USER CONNECTER
+ *                        GET USER CONNECTÉ
  * =============================================================== */
 router.get("/user", auth, async (req, res) => {
     try {
@@ -96,7 +99,7 @@ router.get("/user", auth, async (req, res) => {
         if (rows.length === 0)
             return res.status(404).json({ error: "Utilisateur introuvable" });
 
-        res.json(rows[0]);
+        res.status(200).json(rows[0]);
 
     } catch (err) {
         console.error(err);
@@ -105,7 +108,7 @@ router.get("/user", auth, async (req, res) => {
 });
 
 /* ===============================================================
- *                         GET   TODOS 
+ *                         GET TODOS 
  * =============================================================== */
 router.get("/user/todos", auth, async (req, res) => {
     try {
@@ -113,15 +116,13 @@ router.get("/user/todos", auth, async (req, res) => {
             "SELECT * FROM todo WHERE user_id = ?",
             [req.user.id]
         );
-        res.json(todos);
+        res.status(200).json(todos);
 
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Erreur serveur" });
     }
 });
-
-
 
 /* ===============================================================
  *                        DELETE TODO
@@ -141,7 +142,7 @@ router.delete("/todos/:id", auth, async (req, res) => {
 
         await db.query("DELETE FROM todo WHERE id = ?", [todoId]);
 
-        res.json({ success: true, message: "Todo supprimée" });
+        return res.status(204).send(); // No Content
 
     } catch (err) {
         console.error(err);
@@ -149,10 +150,8 @@ router.delete("/todos/:id", auth, async (req, res) => {
     }
 });
 
-
-
 /* ===============================================================
- *                       GET USER BY ID or EMAIL
+ *                       GET USER BY ID/EMAIL
  * =============================================================== */
 router.get("/users/:param", auth, async (req, res) => {
     const param = req.params.param;
@@ -168,7 +167,7 @@ router.get("/users/:param", auth, async (req, res) => {
         if (rows.length === 0)
             return res.status(404).json({ error: "Utilisateur introuvable" });
 
-        res.json(rows[0]);
+        return res.status(200).json(rows[0]);
 
     } catch (err) {
         console.error(err);
@@ -177,14 +176,14 @@ router.get("/users/:param", auth, async (req, res) => {
 });
 
 /* ===============================================================
- *                       GET ALL USERS
+ *                         GET ALL USERS
  * =============================================================== */
 router.get("/users", auth, async (req, res) => {
     try {
         const [rows] = await db.query(
             "SELECT id, firstname, name, email, birthdate FROM user"
         );
-        res.json(rows);
+        res.status(200).json(rows);
 
     } catch (err) {
         console.error(err);
@@ -203,11 +202,11 @@ router.put("/users/:id", auth, async (req, res) => {
 
     try {
         await db.query(
-            "UPDATE user SET name=?, email=?, firstname=? WHERE id=?",
+            "UPDATE user SET name = ?, email = ?, firstname = ? WHERE id = ?",
             [name, email, firstname, req.params.id]
         );
 
-        res.json({ success: true, message: "Utilisateur mis à jour" });
+        res.status(200).json({ success: true, message: "Utilisateur mis à jour" });
 
     } catch (err) {
         console.error(err);
@@ -216,13 +215,13 @@ router.put("/users/:id", auth, async (req, res) => {
 });
 
 /* ===============================================================
- *                        DELETE USER
+ *                         DELETE USER
  * =============================================================== */
 router.delete("/users/:id", auth, async (req, res) => {
     try {
         await db.query("DELETE FROM user WHERE id = ?", [req.params.id]);
 
-        res.json({ success: true, message: "Utilisateur supprimé" });
+        return res.status(204).send(); // No Content
 
     } catch (err) {
         console.error(err);
@@ -231,3 +230,4 @@ router.delete("/users/:id", auth, async (req, res) => {
 });
 
 module.exports = router;
+
