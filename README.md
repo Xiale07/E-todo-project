@@ -41,7 +41,7 @@ Accéder au site depuis le lien suivant :   http://localhost:5173/
 ## 📁 Arborescence du projet
 
 ```text
-B-WEB-101-LIL-1-1-etodo-2
+etodo
 ├─ .devcontainer/
 │  └─ devcontainer.json
 │
@@ -153,27 +153,8 @@ SELECT * FROM todo;
 
 ---
 
-## 👥 Crédits (avant le commit Start)
 
-### Frontend
-
-* Clément Spanneut
-
-### Backend
-
-* **User** : Alexis Vallart
-* **Todos** : Thybaud Ducorney-Tison && Alexis Vallart
-
-### Remerciements
-
-Bastien, Estelle, Joseph, Leïa, Lucie, Achille, Clément, Julia, Malvina,
-Marie-Delphine, Benoît, Juliette, Mathieu, Christophe, Jean-Paul, Anaïs,
-Gauthier, Julien, Louison, Laurent, Cathy
-
-
----
-
-## 👥 Crédits (après le commit Start)
+## 👥 Crédits 
 
 ### Frontend && Backend
 
@@ -184,13 +165,12 @@ Gauthier, Julien, Louison, Laurent, Cathy
 
 Bastien, Estelle, Joseph, Leïa, Lucie, Achille, Clément, Julia, Malvina,
 Marie-Delphine, Benoît, Juliette, Mathieu, Christophe, Jean-Paul, Anaïs,
-Gauthier, Julien, Louison, Laurent, Cathy
+Gauthier, Julien, Louison, Laurent, Cathy, Clément, Thybaud
 
 
 ---
 
 ## 🧑‍💻 Contributions
 
-* Clément Spanneut : [https://github.com/Spanootnoot](https://github.com/Spanootnoot)
 * Alexis Vallart : [https://github.com/Xiale07](https://github.com/Xiale07)
-* Thybaud Ducorney-Tison : [https://github.com/kazubaruk](https://github.com/kazubaruk)
+
