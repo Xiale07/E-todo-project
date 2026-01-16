@@ -23,7 +23,7 @@ La page principale inclut une **barre de progression dynamique** qui évolue lor
 1. **Cloner le dépôt :**
 
 ```bash
-git clone git@github.com:EpitechBachelorPromo2028/B-WEB-101-LIL-1-1-etodo-2.git
+git clone git@github.com:Xiale07/E-todo-project.git
 ```
 
 2. **Installer Docker**
